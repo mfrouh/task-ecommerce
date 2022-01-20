@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,7 +17,7 @@ class CartFactory extends Factory
     {
         return [
             'product_id' => Product::factory()->create()->id,
-            'category_id' => Category::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
             'quantity' => rand(1, 6),
         ];
     }

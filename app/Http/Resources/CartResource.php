@@ -18,6 +18,7 @@ class CartResource extends JsonResource
         return [
             'product' => ProductResource::make($this->whenLoaded('product')),
             'user' => UserResource::make($this->whenLoaded('user')),
+            'total_price' => $this->total_price,
 
             $this->merge(Arr::except(parent::toArray($request), [
                 'created_at', 'updated_at',

@@ -24,5 +24,7 @@ Route::prefix('backend')->namespace('Backend')->middleware(['auth', 'can:Admin']
 });
 
 Route::namespace ('Frontend')->middleware(['auth', 'can:Customer'])->group(function () {
-
+    Route::get('dashboard', 'DashboardController')->name('dashboard');
+    Route::delete('cart', 'CartController@clear')->name('cart.clear');
+    Route::apiResource('cart', 'CartController')->except('update', 'show');
 });
