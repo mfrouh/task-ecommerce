@@ -10,13 +10,18 @@ use Inertia\Inertia;
 
 class CartController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $carts = CartResource::collection(Cart::Content());
-        if ($request->ajax()) {
-            return response()->json(['data' => $carts], 200);
-        }
+
         return Inertia::render('Cart', ['carts' => $carts]);
+    }
+
+    public function getCart()
+    {
+        $carts = CartResource::collection(Cart::Content());
+
+        return response()->json(['data' => $carts], 200);
     }
 
     public function store(Request $request)

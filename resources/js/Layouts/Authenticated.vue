@@ -31,8 +31,8 @@
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                            <a
-                                href="/cart"
+                             <BreezeNavLink
+                                :href="route('cart.index')"
                                 class="flex items-center mr-5 justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
                                 aria-label="cart-button "
                             >
@@ -53,7 +53,7 @@
                                     class="cart-counter-badge flex items-center justify-center bg-heading text-white absolute -top-2.5 xl:-top-3 -end-2.5 xl:-end-3 rounded-full font-bold"
                                     >{{$page.props.cartCount}}</span
                                 >
-                            </a>
+                            </BreezeNavLink>
                             <div
                                 class="hidden md:flex justify-end items-center space-s-6 lg:space-s-5 xl:space-s-8 2xl:space-s-10 ms-auto flex-shrink-0"
                                 v-if="!$page.props.auth.user"

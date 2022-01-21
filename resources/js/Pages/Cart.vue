@@ -141,7 +141,7 @@ export default {
         },
         getCart() {
             axios
-                .get(this.route("cart.index"))
+                .get(this.route("getCart"))
                 .then((response) => {
                     this.MyCarts = response.data.data;
                 })
