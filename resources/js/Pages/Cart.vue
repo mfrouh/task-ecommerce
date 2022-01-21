@@ -134,6 +134,7 @@ export default {
                 .delete(this.route("cart.destroy", cart))
                 .then((response) => {
                     this.$page.props.cartCount = response.data.cartCount;
+                    this.$toast.error(response.data.message);
                     this.getCart();
                 })
                 .catch((e) => {});

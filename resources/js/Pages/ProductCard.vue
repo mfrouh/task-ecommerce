@@ -37,7 +37,7 @@
                 </p>
             </div>
             <div class="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">
-               <a :href="product.url">Details</a>
+                <a :href="product.url">Details</a>
             </div>
         </div>
     </div>
@@ -66,6 +66,7 @@ export default {
                 })
                 .then((response) => {
                     this.$page.props.cartCount = response.data.cartCount;
+                    this.$toast.success(response.data.message);
                 })
                 .catch((e) => {});
         },

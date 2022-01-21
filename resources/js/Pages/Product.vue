@@ -80,9 +80,9 @@ export default {
                 })
                 .then((response) => {
                     this.$page.props.cartCount = response.data.cartCount;
+                    this.$toast.success(response.data.message);
                 })
-                .catch((e) => {
-                });
+                .catch((e) => {});
         },
     },
 };
