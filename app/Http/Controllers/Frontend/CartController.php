@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $carts = CartResource::collection(Cart::Content());
-
-        return response()->json(['data' => $carts], 200);
+        if ($request->ajax()) {
+            return response()->json(['data' => $carts], 200);
+        }
+        return Inertia::render('Cart', ['carts' => $carts]);
     }
 
     public function store(Request $request)
@@ -21,7 +24,7 @@ class CartController extends Controller
         $cart = Cart::where('product_id', $request->product_id)->where('user_id', auth()->id())->first();
         if ($cart && $request->quantity != null && $request->quantity == 0) {
             $cart->delete();
-            return response()->json(['message' => 'Success Delete Item In Cart'], 200);
+            return response()->json(['message' => 'Success Delete Item In Cart', 'cartCount' => Cart::content()->count()], 200);
         }
 
         if (!$cart && $request->quantity != null && $request->quantity == 0) {
@@ -30,10 +33,10 @@ class CartController extends Controller
 
         if (!$cart) {
             Cart::Create(['product_id' => $request->product_id, 'user_id' => auth()->user()->id, 'quantity' => $request->quantity ?? 1]);
-            return response()->json(['message' => 'Success Create Item Cart'], 200);
+            return response()->json(['message' => 'Success Create Item Cart', 'cartCount' => Cart::content()->count()], 200);
         } else {
             $cart->update(['quantity' => $request->quantity ?? $cart->quantity + 1]);
-            return response()->json(['message' => 'Success Update Your Cart'], 200);
+            return response()->json(['message' => 'Success Update Your Cart', 'cartCount' => Cart::content()->count()], 200);
         }
     }
 
@@ -43,12 +46,12 @@ class CartController extends Controller
             return response()->json(['message' => 'Unauthorized'], 403);
         }
         $cart->delete();
-        return response()->json(['message' => 'Success Delete Item In Cart'], 200);
+        return response()->json(['message' => 'Success Delete Item In Cart', 'cartCount' => Cart::content()->count()], 200);
     }
 
     public function clear()
     {
         Cart::clear();
-        return response()->json(['message' => 'Success Clear Cart'], 200);
+        return response()->json(['message' => 'Success Clear Cart', 'cartCount' => Cart::content()->count()], 200);
     }
 }

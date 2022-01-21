@@ -17,9 +17,11 @@ class ProductResource extends JsonResource
     {
         return [
             'category' => CategoryResource::make($this->whenLoaded('category')),
+            'url' => route('product', [$this->id]),
+            'image'=> asset('storage/'.$this->image),
 
             $this->merge(Arr::except(parent::toArray($request), [
-                'created_at', 'updated_at',
+                'created_at', 'updated_at','image'
             ])),
         ];
     }

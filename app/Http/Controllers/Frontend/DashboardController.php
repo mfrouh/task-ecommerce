@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -15,6 +16,6 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        return Inertia::render('Dashboard');
     }
 }

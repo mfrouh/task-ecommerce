@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace ('Frontend')->group(function () {
+    Route::get('/', 'HomeController')->name('home');
+    Route::get('/product/{product}', 'ProductController')->name('product');
+    Route::get('/category/{category}', 'CategoryController')->name('category');
 });
 
 Route::prefix('backend')->namespace('Backend')->middleware(['auth', 'can:Admin'])->as('backend.')->group(function () {
-
     Route::apiResource('category', 'CategoryController');
     Route::apiResource('product', 'ProductController');
 });
@@ -28,3 +30,5 @@ Route::namespace ('Frontend')->middleware(['auth', 'can:Customer'])->group(funct
     Route::delete('cart', 'CartController@clear')->name('cart.clear');
     Route::apiResource('cart', 'CartController')->except('update', 'show');
 });
+
+require __DIR__ . '/auth.php';

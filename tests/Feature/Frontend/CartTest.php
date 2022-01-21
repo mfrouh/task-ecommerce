@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\Frontend;
 
-use App\Models\Cart;
-use App\Models\Product;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CartTest extends TestCase
 {
@@ -21,6 +22,7 @@ class CartTest extends TestCase
         $this->customer = User::factory()->create(['role' => 'Customer']);
         $this->actingAs($this->customer);
         $this->customer2 = User::factory()->create(['role' => 'Customer']);
+        Category::factory()->create();
     }
 
     public function test_get_auth_cart_content()
