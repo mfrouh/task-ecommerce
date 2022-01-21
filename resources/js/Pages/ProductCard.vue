@@ -37,7 +37,7 @@
                 </p>
             </div>
             <div class="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">
-                <a :href="product.url">Details</a>
+                <BreezeNavLink :href="product.url">Details</BreezeNavLink>
             </div>
         </div>
     </div>
@@ -45,11 +45,13 @@
 
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
+        BreezeNavLink,
         Head,
     },
     props: {

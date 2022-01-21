@@ -4,13 +4,13 @@
     <BreezeAuthenticatedLayout>
         <template #header>
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <a
+                <BreezeNavLink
                     v-for="category in MYcategories"
                     :key="category.id"
                     :href="route('category', category.slug)"
                 >
-                    {{ category.name }}
-                </a>
+                     {{ category.name }}
+                </BreezeNavLink>
             </div>
         </template>
 
@@ -106,6 +106,7 @@
 <script>
 import ProductCard from "./ProductCard.vue";
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -113,6 +114,7 @@ export default {
         BreezeAuthenticatedLayout,
         Head,
         ProductCard,
+        BreezeNavLink,
     },
     props: {
         products: Object,
