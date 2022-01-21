@@ -18,7 +18,7 @@ Route::namespace ('Frontend')->group(function () {
     Route::get('/', 'HomeController')->name('home');
     Route::get('/filter', 'FilterController')->name('filter');
     Route::get('/product/{product}', 'ProductController')->name('product');
-    Route::get('/category/{category}', 'CategoryController')->name('category');
+    Route::get('/category/{category:slug}', 'CategoryController')->name('category');
 });
 
 Route::prefix('backend')->namespace('Backend')->middleware(['auth', 'can:Admin'])->as('backend.')->group(function () {

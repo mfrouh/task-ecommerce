@@ -2,6 +2,18 @@
     <Head title="Home" />
 
     <BreezeAuthenticatedLayout>
+        <template #header>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a
+                    v-for="category in MYcategories"
+                    :key="category.id"
+                    :href="route('category', category.slug)"
+                >
+                    {{ category.name }}
+                </a>
+            </div>
+        </template>
+
         <div class="py-12">
             <div class="max-w-9xl flex mx-auto sm:px-6 lg:px-8">
                 <div
@@ -26,7 +38,7 @@
                         >
                             Category
                         </h3>
-                        <div class="mt-2 flex flex-col space-y-4">
+                        <div class="mt-2 mb-4 flex flex-col space-y-4">
                             <label
                                 v-for="category in MYcategories"
                                 :key="category.id"
@@ -35,10 +47,11 @@
                                     type="checkbox"
                                     class="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
                                     v-model="filCategories"
-                                    :value="category.id" />
-                                {{ category.name
-                                }}<span class="ms-4 -mt-0.5"> </span
-                            ></label>
+                                    :value="category.id"
+                                />
+                                <span class="ms-4 -mt-0.5"> </span>
+                                {{ category.name }}
+                            </label>
                         </div>
                         <h3
                             class="text-heading text-sm md:text-base font-semibold mb-2"
@@ -52,7 +65,7 @@
                             min="0"
                         />
                         <h3
-                            class="text-heading text-sm md:text-base font-semibold mb-2"
+                            class="text-heading text-sm md:text-base font-semibold mt-2 mb-2"
                         >
                             Max Price
                         </h3>
@@ -133,3 +146,9 @@ export default {
     mounted() {},
 };
 </script>
+<style>
+.-mt-0\.5 {
+    margin-top: -0.125rem;
+    margin-left: 11px;
+}
+</style>

@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory()->create(['email' => 'admin@example.com', 'role' => 'Admin']);
-        \App\Models\User::factory(20)->create();
-        \App\Models\Category::factory(6)->hasProducts(50)->create();
+        for ($i = 1; $i <= 20; $i++) {
+            \App\Models\User::factory()->create(['email' => "customer$i@example.com"]);
+
+        }\App\Models\Category::factory(6)->hasProducts(50)->create();
     }
 }

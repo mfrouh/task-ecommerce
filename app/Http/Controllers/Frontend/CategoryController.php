@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -20,6 +21,6 @@ class CategoryController extends Controller
     public function __invoke(Category $category, Request $request)
     {
         $products = ProductResource::collection(Product::where('category_id', $category->id)->active()->get());
-        return Inertia::render('Category', ['products' => ProductResource::collection($products)]);
+        return Inertia::render('Category', ['category' => CategoryResource::make($category), 'products' => ProductResource::collection($products)]);
     }
 }

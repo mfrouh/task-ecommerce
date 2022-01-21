@@ -12,8 +12,8 @@
             <div class="max-w-7xl flex mx-auto sm:px-6 lg:px-8">
                 <div class="container mx-auto">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full shadow-inner">
-                            <thead class="bg-white shadow-sm">
+                        <table class="w-full">
+                            <thead class="bg-white shadow-md rounded-sm">
                                 <tr>
                                     <th
                                         class="px-6 py-3 font-bold whitespace-nowrap"
@@ -40,11 +40,11 @@
                                     ></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="bg-white">
                                 <tr
                                     v-for="cart in MyCarts"
                                     :key="cart.id"
-                                    class="p-4"
+                                    class="shadow-sm rounded-sm"
                                 >
                                     <td>
                                         <div class="flex justify-center">
