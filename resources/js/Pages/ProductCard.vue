@@ -70,7 +70,11 @@ export default {
                     this.$page.props.cartCount = response.data.cartCount;
                     this.$toast.success(response.data.message);
                 })
-                .catch((e) => {});
+                .catch((e) => {
+                    if (e.response.status === 401) {
+                        this.$toast.error("You Need To Login");
+                    }
+                });
         },
     },
 };

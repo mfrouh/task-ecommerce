@@ -20154,9 +20154,13 @@ __webpack_require__.r(__webpack_exports__);
     getCart: function getCart() {
       var _this2 = this;
 
-      axios.get(this.route("cart.index")).then(function (response) {
+      axios.get(this.route("getCart")).then(function (response) {
         _this2.MyCarts = response.data.data;
-      })["catch"](function (e) {});
+      })["catch"](function (e) {
+        if (e.response.status === 401) {
+          _this2.$toast.error("You Need To Login");
+        }
+      });
     }
   }
 });
@@ -20334,7 +20338,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.$page.props.cartCount = response.data.cartCount;
 
         _this.$toast.success(response.data.message);
-      })["catch"](function (e) {});
+      })["catch"](function (e) {
+        if (e.response.status === 401) {
+          _this.$toast.error("You Need To Login");
+        }
+      });
     }
   }
 });
@@ -20380,7 +20388,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.$page.props.cartCount = response.data.cartCount;
 
         _this.$toast.success(response.data.message);
-      })["catch"](function (e) {});
+      })["catch"](function (e) {
+        if (e.response.status === 401) {
+          _this.$toast.error("You Need To Login");
+        }
+      });
     }
   }
 });
@@ -21850,7 +21862,7 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   colspan: "5"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-center p-3"
-}, "Cart Empty")], -1
+}, " Cart Empty ")], -1
 /* HOISTED */
 );
 

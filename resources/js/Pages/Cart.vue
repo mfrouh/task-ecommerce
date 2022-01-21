@@ -96,9 +96,11 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr v-if="MyCarts.length==0">
+                                <tr v-if="MyCarts.length == 0">
                                     <td colspan="5">
-                                        <p class="text-center p-3">Cart Empty</p>
+                                        <p class="text-center p-3">
+                                            Cart Empty
+                                        </p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -145,7 +147,11 @@ export default {
                 .then((response) => {
                     this.MyCarts = response.data.data;
                 })
-                .catch((e) => {});
+                .catch((e) => {
+                    if (e.response.status === 401) {
+                        this.$toast.error("You Need To Login");
+                    }
+                });
         },
     },
 };
