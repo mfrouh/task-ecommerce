@@ -45,13 +45,23 @@
                         >
                             Min Price
                         </h3>
-                        <input type="number" v-model="min_price" class="mt-1 block w-full" min="0" />
+                        <input
+                            type="number"
+                            v-model="min_price"
+                            class="mt-1 block w-full"
+                            min="0"
+                        />
                         <h3
                             class="text-heading text-sm md:text-base font-semibold mb-2"
                         >
                             Max Price
                         </h3>
-                        <input type="number" v-model="max_price" class="mt-1 block w-full" min="0" />
+                        <input
+                            type="number"
+                            v-model="max_price"
+                            class="mt-1 block w-full"
+                            min="0"
+                        />
                         <h3
                             class="text-heading text-sm md:text-base mt-3 font-semibold mb-7 text-left"
                         >
@@ -106,15 +116,16 @@ export default {
     },
     methods: {
         filProducts() {
-            console.log(this.filCategories);
             axios
-                .get(this.route("home"), {
-                    categories: this.filterCategories,
-                    min_price: this.min_price,
-                    max_price: this.min_price,
+                .get(this.route("filter"), {
+                    params: {
+                        categories: this.filCategories,
+                        min_price: this.min_price,
+                        max_price: this.max_price,
+                    },
                 })
                 .then((response) => {
-                    // this.MyProducts = response.data.products;
+                    this.MyProducts = response.data.products;
                 })
                 .catch((e) => {});
         },

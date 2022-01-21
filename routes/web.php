@@ -16,6 +16,7 @@ use Inertia\Inertia;
 
 Route::namespace ('Frontend')->group(function () {
     Route::get('/', 'HomeController')->name('home');
+    Route::get('/filter', 'FilterController')->name('filter');
     Route::get('/product/{product}', 'ProductController')->name('product');
     Route::get('/category/{category}', 'CategoryController')->name('category');
 });

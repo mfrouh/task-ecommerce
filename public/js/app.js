@@ -20050,12 +20050,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     filProducts: function filProducts() {
-      console.log(this.filCategories);
-      axios.get(this.route("home"), {
-        categories: this.filterCategories,
-        min_price: this.min_price,
-        max_price: this.min_price
-      }).then(function (response) {// this.MyProducts = response.data.products;
+      var _this = this;
+
+      axios.get(this.route("filter"), {
+        params: {
+          categories: this.filCategories,
+          min_price: this.min_price,
+          max_price: this.max_price
+        }
+      }).then(function (response) {
+        _this.MyProducts = response.data.products;
       })["catch"](function (e) {});
     }
   },
