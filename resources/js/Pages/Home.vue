@@ -9,12 +9,12 @@
                     :key="category.id"
                     :href="route('category', category.slug)"
                 >
-                     {{ category.name }}
+                    {{ category.name }}
                 </BreezeNavLink>
             </div>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
             <div class="max-w-9xl flex mx-auto sm:px-6 lg:px-8">
                 <div
                     class="w-72 flex-shrink-0 overflow-hidden shadow-sm sm:rounded-lg"
@@ -53,30 +53,36 @@
                                 {{ category.name }}
                             </label>
                         </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="col-span-1">
+                                <h3
+                                    class="text-heading text-sm md:text-base font-semibold"
+                                >
+                                    Min Price
+                                </h3>
+                                <input
+                                    type="number"
+                                    v-model="min_price"
+                                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full"
+                                    min="0"
+                                />
+                            </div>
+                            <div class="col-span-1">
+                                <h3
+                                    class="text-heading text-sm md:text-base font-semibold"
+                                >
+                                    Max Price
+                                </h3>
+                                <input
+                                    type="number"
+                                    v-model="max_price"
+                                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full"
+                                    min="0"
+                                />
+                            </div>
+                        </div>
                         <h3
-                            class="text-heading text-sm md:text-base font-semibold mb-2"
-                        >
-                            Min Price
-                        </h3>
-                        <input
-                            type="number"
-                            v-model="min_price"
-                            class="mt-1 block w-full"
-                            min="0"
-                        />
-                        <h3
-                            class="text-heading text-sm md:text-base font-semibold mt-2 mb-2"
-                        >
-                            Max Price
-                        </h3>
-                        <input
-                            type="number"
-                            v-model="max_price"
-                            class="mt-1 block w-full"
-                            min="0"
-                        />
-                        <h3
-                            class="text-heading text-sm md:text-base mt-3 font-semibold mb-7 text-left"
+                            class="text-heading text-sm md:text-base mt-3 font-semibold mb-7 text-center"
                         >
                             <button
                                 class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent rounded-md placeholder-white focus-visible:outline-none focus:outline-none h-11 md:h-12 px-3 bg-heading text-white py-1 transform-none normal-case hover:text-white w-50 md:w-6/12 xl:w-50 hover:bg-gray-700 bg-gray-900"
@@ -90,6 +96,19 @@
                 <div class="overflow-hidden w-full">
                     <div
                         class="relative m-3 flex flex-wrap mx-auto justify-center"
+                        v-if="MyProducts.length == 0"
+                    >
+                        <div
+                            class="bg-white overflow-hidden shadow-sm sm:rounded-lg  w-full"
+                        >
+                            <div class="p-6 bg-white border-b border-gray-200 text-center">
+                                Not Found Products
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="relative m-3 flex flex-wrap mx-auto justify-center"
+                        v-if="MyProducts.length != 0"
                     >
                         <product-card
                             v-for="product in MyProducts"
