@@ -1,9 +1,14 @@
 <template>
     <Head title="Categories" />
-
     <AuthAdmin>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <button
+                    @click="createCategory = true"
+                    class="bg-transparent bg-blue-500 text-gray-100 font-bold py-2 px-4 rounded-md"
+                >
+                    Create
+                </button>
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div
@@ -61,7 +66,11 @@
                                                 <div
                                                     class="flex justify-center space-x-2"
                                                 >
-                                                    <button>
+                                                    <button
+                                                        v-on:click="
+                                                            edit(category)
+                                                        "
+                                                    >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             class="h-6 w-6 text-indigo-600 cursor-pointer"
@@ -115,19 +124,34 @@
                     </div>
                 </div>
             </div>
+            <CreateCategory
+                :show="createCategory"
+                @close="createCategory = false"
+                @ok="getData"
+            />
+            <EditCategory
+                v-if="editCategory"
+                :category="category"
+                :show="editCategory"
+                @close="editCategory = false"
+                @ok="getData"
+            />
         </div>
     </AuthAdmin>
 </template>
 
 <script>
 import AuthAdmin from "@/Layouts/AuthAdmin.vue";
+import CreateCategory from "@/Pages/Modals/CreateCategory.vue";
+import EditCategory from "@/Pages/Modals/EditCategory.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
 
 export default {
-    name: "Pagination Example",
     components: {
         AuthAdmin,
+        EditCategory,
+        CreateCategory,
         Head,
         VueTailwindPagination,
     },
@@ -140,6 +164,10 @@ export default {
             perPage: this.categories.meta.per_page,
             total: this.categories.meta.total,
             MYcategories: this.categories.data,
+            showModal: false,
+            createCategory: false,
+            editCategory: false,
+            category: null,
         };
     },
     methods: {
@@ -169,6 +197,10 @@ export default {
                     this.$toast.error(response.data.message);
                 })
                 .catch((e) => {});
+        },
+        edit(category) {
+            this.editCategory = true;
+            this.category = category;
         },
     },
 };

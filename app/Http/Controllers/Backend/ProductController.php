@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Inertia\Inertia;
-use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Product;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -29,7 +29,6 @@ class ProductController extends Controller
 
         return response()->json(['data' => $products], 200);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -64,7 +63,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $product->update($request->validated());
+        $product->update($request->image ? $request->validated() : $request->except('image'));
 
         return response()->json(['message' => 'Product Updated Successful'], 200);
     }

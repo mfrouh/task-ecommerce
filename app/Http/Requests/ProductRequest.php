@@ -50,7 +50,7 @@ class ProductRequest extends FormRequest
             'name' => 'required|unique:products,name,' . request()->route('product')->id,
             'status' => 'nullable|boolean',
             'price' => 'required|numeric',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
             'description' => 'required',
             'quantity' => 'required|integer',
             'category_id' => 'required|exists:categories,id',

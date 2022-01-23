@@ -4,6 +4,13 @@
     <AuthAdmin>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <button
+                    @click="createProduct = true"
+                    class="bg-transparent bg-blue-500 text-gray-100 font-bold py-2 px-4 rounded-md"
+                >
+                    Create
+                </button>
+
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div
@@ -111,7 +118,11 @@
                                                 <div
                                                     class="flex justify-center space-x-2"
                                                 >
-                                                    <button>
+                                                    <button
+                                                        v-on:click="
+                                                            edit(product)
+                                                        "
+                                                    >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             class="h-6 w-6 text-indigo-600 cursor-pointer"
@@ -165,6 +176,18 @@
                     </div>
                 </div>
             </div>
+            <CreateProduct
+                :show="createProduct"
+                @close="createProduct = false"
+                @ok="getData"
+            />
+            <EditProduct
+                v-if="editProduct"
+                :product="product"
+                :show="editProduct"
+                @close="editProduct = false"
+                @ok="getData"
+            />
         </div>
     </AuthAdmin>
 </template>
@@ -172,12 +195,16 @@
 <script>
 import AuthAdmin from "@/Layouts/AuthAdmin.vue";
 import { Head } from "@inertiajs/inertia-vue3";
+import CreateProduct from "@/Pages/Modals/CreateProduct.vue";
+import EditProduct from "@/Pages/Modals/EditProduct.vue";
 import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
 
 export default {
     name: "Pagination",
     components: {
         AuthAdmin,
+        EditProduct,
+        CreateProduct,
         Head,
         VueTailwindPagination,
     },
@@ -190,6 +217,10 @@ export default {
             perPage: this.products.meta.per_page,
             total: this.products.meta.total,
             MYproducts: this.products.data,
+            showModal: false,
+            createProduct: false,
+            editProduct: false,
+            product: null,
         };
     },
     methods: {
@@ -219,6 +250,10 @@ export default {
                     this.$toast.error(response.data.message);
                 })
                 .catch((e) => {});
+        },
+        edit(product) {
+            this.editProduct = true;
+            this.product = product;
         },
     },
 };
