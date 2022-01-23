@@ -20772,8 +20772,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var formDate = new FormData();
       formDate.append("image", this.form.image);
-      formDate.append("name", this.form.name); // formDate.append("status", this.form.status);
-
+      formDate.append("name", this.form.name);
+      formDate.set("status", this.form.status);
       formDate.append("price", this.form.price);
       formDate.append("quantity", this.form.quantity);
       formDate.append("description", this.form.description);

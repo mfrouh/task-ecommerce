@@ -23,7 +23,12 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if ($request->user()->can('Customer')) {
+                    return redirect()->intended(RouteServiceProvider::HOME);
+                }
+                if ($request->user()->can('Admin')) {
+                    return redirect()->intended("/backend/dashboard");
+                }
             }
         }
 
