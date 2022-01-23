@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import ProductCard from "./ProductCard.vue";
+import ProductCard from "../../Components/ProductCard.vue";
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/inertia-vue3";

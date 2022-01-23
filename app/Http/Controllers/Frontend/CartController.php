@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $carts = CartResource::collection(Cart::Content());
 
-        return Inertia::render('Cart', ['carts' => $carts]);
+        return Inertia::render('Frontend/Cart', ['carts' => $carts]);
     }
 
     public function getCart()

@@ -18,6 +18,6 @@ class ProductController extends Controller
      */
     public function __invoke(Product $product, Request $request)
     {
-        return Inertia::render('Product', ['product' => ProductResource::make($product)]);
+        return Inertia::render('Frontend/Product', ['product' => ProductResource::make($product)]);
     }
 }

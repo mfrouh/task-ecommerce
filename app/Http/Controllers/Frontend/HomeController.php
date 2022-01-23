@@ -24,6 +24,6 @@ class HomeController extends Controller
             $query->active();
         })->filter()->active()->get());
         $categories = CategoryResource::collection(Category::active()->get());
-        return Inertia::render('Home', ['products' => $products, 'categories' => $categories]);
+        return Inertia::render('Frontend/Home', ['products' => $products, 'categories' => $categories]);
     }
 }
