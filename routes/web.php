@@ -22,6 +22,9 @@ Route::namespace ('Frontend')->group(function () {
 });
 
 Route::prefix('backend')->namespace('Backend')->middleware(['auth', 'can:Admin'])->as('backend.')->group(function () {
+    Route::get('dashboard', 'DashboardController')->name('dashboard');
+    Route::get('/category/get-data', 'CategoryController@getData')->name('category.getData');
+    Route::get('/product/get-data', 'ProductController@getData')->name('product.getData');
     Route::apiResource('category', 'CategoryController');
     Route::apiResource('product', 'ProductController');
 });

@@ -26,6 +26,8 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "@incuca/vue3-toaster": "^1.1.1"
+        "@incuca/vue3-toaster": "^1.1.1",
+        "@ocrv/vue-tailwind-pagination": "0.0.4",
+        "v-pagination-3": "^0.1.7"
     }
 }

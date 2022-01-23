@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Inertia\Inertia;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
-use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = CategoryResource::collection(Category::all());
+        $categories = CategoryResource::collection(Category::paginate(10));
+
+        // return response()->json(['data' => $categories], 200);
+        return Inertia::render('Backend/Category', ['categories' => $categories]);
+
+    }
+
+    public function getData()
+    {
+        $categories = CategoryResource::collection(Category::paginate(10));
 
         return response()->json(['data' => $categories], 200);
     }

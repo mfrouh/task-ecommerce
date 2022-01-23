@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Inertia\Inertia;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
-use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -16,10 +17,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = ProductResource::collection(Product::all());
+        $products = ProductResource::collection(Product::with('category')->paginate(10));
+
+        // return response()->json(['data' => $products], 200);
+        return Inertia::render('Backend/Product', ['products' => $products]);
+    }
+
+    public function getData()
+    {
+        $products = ProductResource::collection(Product::with('category')->paginate(10));
 
         return response()->json(['data' => $products], 200);
     }
+
 
     /**
      * Store a newly created resource in storage.
