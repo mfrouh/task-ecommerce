@@ -17,7 +17,10 @@
             <div class="mt-4">
                 <label class="flex items-center">
                     <span class="mr-3 text-sm text-gray-600">Status</span>
-                    <BreezeCheckbox v-model:checked="form.status" />
+                    <BreezeCheckbox
+                        :checked="checkStatus"
+                        v-on:change="changeStatus"
+                    />
                 </label>
             </div>
             <p class="text-sm text-red-600 font-bold" v-if="errors.status">
@@ -160,7 +163,7 @@ export default {
             let formDate = new FormData();
             formDate.append("image", this.form.image);
             formDate.append("name", this.form.name);
-            // formDate.append("status", this.form.status);
+            formDate.append("status", this.form.status);
             formDate.append("price", this.form.price);
             formDate.append("quantity", this.form.quantity);
             formDate.append("description", this.form.description);
@@ -199,6 +202,14 @@ export default {
         },
         onChangeFileUpload(e) {
             this.form.image = e.target.files[0];
+        },
+        changeStatus(e) {
+            this.form.status = e.target.checked ? 1 : 0;
+        },
+    },
+    computed: {
+        checkStatus() {
+            return this.form.status ? true : false;
         },
     },
     mounted() {

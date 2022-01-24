@@ -17,7 +17,7 @@
             <div class="mt-4">
                 <label class="flex items-center">
                     <span class="mr-3 text-sm text-gray-600">Status</span>
-                    <BreezeCheckbox v-model:checked="form.status" />
+                    <BreezeCheckbox v-on:change="changeStatus" />
                 </label>
             </div>
             <p class="text-sm text-red-600 font-bold" v-if="errors.status">
@@ -134,7 +134,7 @@ export default {
             showModal: this.createProduct,
             form: {
                 name: "",
-                status: false,
+                status: 0,
                 image: "",
                 price: "",
                 quantity: "",
@@ -159,7 +159,7 @@ export default {
             let formDate = new FormData();
             formDate.append("image", this.form.image);
             formDate.append("name", this.form.name);
-            // formDate.append("status", this.form.status);
+            formDate.append("status", this.form.status);
             formDate.append("price", this.form.price);
             formDate.append("quantity", this.form.quantity);
             formDate.append("description", this.form.description);
@@ -170,7 +170,7 @@ export default {
                 .then((response) => {
                     this.form.processing = false;
                     this.form.name = "";
-                    this.form.status = false;
+                    this.form.status = 0;
                     this.form.price = "";
                     this.form.description = "";
                     this.form.category_id = "";
@@ -201,6 +201,9 @@ export default {
         },
         onChangeFileUpload(e) {
             this.form.image = e.target.files[0];
+        },
+        changeStatus(e) {
+            this.form.status = e.target.checked ? 1 : 0;
         },
     },
     mounted() {

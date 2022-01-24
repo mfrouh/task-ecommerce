@@ -11,6 +11,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <button
+                    v-if="MyCarts.length != 0"
                     @click="clear"
                     class="bg-transparent bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-md"
                 >
