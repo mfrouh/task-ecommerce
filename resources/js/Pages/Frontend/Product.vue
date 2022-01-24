@@ -43,8 +43,20 @@
                             </div>
                         </div>
                         <div
-                            class="flex items-center space-s-4 md:pe-32 lg:pe-12 2xl:pe-32 3xl:pe-48 border-b border-gray-300 py-8"
+                            class="flex items-center gap-4 space-s-4 md:pe-32 lg:pe-12 2xl:pe-32 3xl:pe-48 border-b border-gray-300 py-8"
                         >
+                            <select
+                                v-model="quantity"
+                                class="font-justify-center semibold rounded-md py-3 px-1 inline-flex w-full"
+                            >
+                                <option
+                                    v-for="index in 10"
+                                    :key="index"
+                                    :value="index"
+                                >
+                                    {{ index }}
+                                </option>
+                            </select>
                             <button
                                 class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent rounded-md placeholder-white focus-visible:outline-none focus:outline-none h-11 md:h-12 px-5 bg-heading text-white py-2 transform-none normal-case hover:text-white w-full md:w-6/12 xl:w-full hover:bg-gray-700 bg-gray-900"
                                 v-on:click="addToCart"
@@ -70,6 +82,12 @@ export default {
     },
     props: {
         product: Object,
+        productQuantity: Number,
+    },
+    data() {
+        return {
+            quantity: this.productQuantity,
+        };
     },
     mounted() {},
     methods: {
@@ -77,6 +95,7 @@ export default {
             axios
                 .post(this.route("cart.store"), {
                     product_id: this.product.id,
+                    quantity: this.quantity,
                 })
                 .then((response) => {
                     this.$page.props.cartCount = response.data.cartCount;

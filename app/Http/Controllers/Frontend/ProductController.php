@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Inertia\Inertia;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -18,6 +18,6 @@ class ProductController extends Controller
      */
     public function __invoke(Product $product, Request $request)
     {
-        return Inertia::render('Frontend/Product', ['product' => ProductResource::make($product)]);
+        return Inertia::render('Frontend/Product', ['product' => ProductResource::make($product), 'productQuantity' => $product->quantity_in_cart]);
     }
 }

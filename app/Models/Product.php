@@ -18,6 +18,8 @@ class Product extends Model
 
     protected $fillable = ['name', 'slug', 'status', 'price', 'image', 'description', 'quantity', 'category_id'];
 
+    protected $appends = ['quantity_in_cart'];
+
     /**
      * Get the category that owns the Product
      *
@@ -45,6 +47,11 @@ class Product extends Model
             ->when(request('min_price'), fn(Builder $query) => $query->minPriceThan(request('min_price')))
             ->when(request('max_price'), fn(Builder $query) => $query->maxPriceThan(request('max_price')));
 
+    }
+
+    public function getQuantityInCartAttribute()
+    {
+        return Cart::where('user_id', auth()->id())->where('product_id', $this->id)->first()?->quantity??1;
     }
 
 }
