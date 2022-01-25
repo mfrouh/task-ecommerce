@@ -30,7 +30,7 @@
                                         )
                                     "
                                 >
-                                    {{ category.name }}
+                                   {{ category.name }}
                                 </BreezeNavLink>
                             </div>
                         </div>
