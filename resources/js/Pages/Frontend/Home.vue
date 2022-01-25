@@ -2,18 +2,6 @@
     <Head title="Home" />
 
     <BreezeAuthenticatedLayout>
-        <template #header>
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <BreezeNavLink
-                    v-for="category in MYcategories"
-                    :key="category.id"
-                    :href="route('category', category.slug)"
-                >
-                    {{ category.name }}
-                </BreezeNavLink>
-            </div>
-        </template>
-
         <div class="py-6">
             <div class="max-w-9xl flex mx-auto sm:px-6 lg:px-8">
                 <div
@@ -107,7 +95,7 @@
                         </div>
                     </div>
                     <div
-                        class="relative m-3 flex flex-wrap mx-auto justify-center"
+                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3  sm:grid-cols-1 gap-4 mx-auto justify-center"
                         v-if="MyProducts.length != 0"
                     >
                         <product-card
@@ -127,9 +115,11 @@ import ProductCard from "../../Components/ProductCard.vue";
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
+        Link,
         BreezeAuthenticatedLayout,
         Head,
         ProductCard,

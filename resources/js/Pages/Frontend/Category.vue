@@ -14,7 +14,7 @@
                     class="w-72 flex-shrink-0 overflow-hidden shadow-sm sm:rounded-lg"
                     style="position: sticky; top: 50px"
                 >
-                    <div class="p-3">
+                    <div class="p-3 ">
                         <div class="block border-b border-gray-300 pb-7 mb-7">
                             <div
                                 class="flex items-center justify-between mb-2.5"
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div
-                        class="relative m-3 flex flex-wrap mx-auto justify-center"
+                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mx-auto justify-center"
                         v-if="MyProducts.length != 0"
                     >
                         <product-card

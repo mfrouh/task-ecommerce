@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative max-w-sm min-w-[340px] bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer"
+        class="relative col-span-1 bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer"
     >
         <div class="overflow-x-hidden rounded-2xl relative">
             <img
@@ -37,22 +37,18 @@
                 </p>
             </div>
             <div class="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">
-                <BreezeNavLink :href="product.url">Details</BreezeNavLink>
+                <Link :href="product.url">Details</Link>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
-import BreezeNavLink from "@/Components/NavLink.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
-        BreezeAuthenticatedLayout,
-        BreezeNavLink,
-        Head,
+        Link,
     },
     props: {
         product: Object,

@@ -20,40 +20,49 @@
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <BreezeNavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                    v-if="$page.props.auth.user"
+                                    v-for="category in $page.props.categories"
+                                    :key="category.id"
+                                    :href="route('category', category.slug)"
+                                    :active="
+                                        route().current(
+                                            'category',
+                                            category.slug
+                                        )
+                                    "
                                 >
-                                    Dashboard
+                                    {{ category.name }}
                                 </BreezeNavLink>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                             <BreezeNavLink
+                            <Link
                                 :href="route('cart.index')"
                                 class="flex items-center mr-5 justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
                                 aria-label="cart-button "
                             >
                                 <svg
+                                    class="flex-shrink-0 h-6 w-6 text-black group-hover:text-gray-500"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width="18px"
-                                    height="18px"
-                                    viewBox="0 0 20 20"
-                                    class="md:w-4 xl:w-5 md:h-4 xl:h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
                                 >
                                     <path
-                                        d="M5,4H19a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4ZM2,5A3,3,0,0,1,5,2H19a3,3,0,0,1,3,3V19a3,3,0,0,1-3,3H5a3,3,0,0,1-3-3Zm10,7C9.239,12,7,9.314,7,6H9c0,2.566,1.669,4,3,4s3-1.434,3-4h2C17,9.314,14.761,12,12,12Z"
-                                        transform="translate(-2 -2)"
-                                        fill="currentColor"
-                                        fill-rule="evenodd"
-                                    ></path></svg
-                                ><span
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                    />
+                                </svg>
+                                <span
+                                    v-if="$page.props.cartCount"
                                     class="cart-counter-badge flex items-center justify-center bg-heading text-white absolute -top-2.5 xl:-top-3 -end-2.5 xl:-end-3 rounded-full font-bold"
-                                    >{{$page.props.cartCount}}</span
+                                    >{{ $page.props.cartCount }}</span
                                 >
-                            </BreezeNavLink>
+                            </Link>
                             <div
                                 class="hidden md:flex justify-end items-center space-s-6 lg:space-s-5 xl:space-s-8 2xl:space-s-10 ms-auto flex-shrink-0"
                                 v-if="!$page.props.auth.user"
@@ -95,6 +104,11 @@
                                     </template>
 
                                     <template #content>
+                                        <BreezeDropdownLink
+                                            :href="route('dashboard')"
+                                        >
+                                            Dashboard
+                                        </BreezeDropdownLink>
                                         <BreezeDropdownLink
                                             :href="route('logout')"
                                             method="post"
@@ -160,11 +174,12 @@
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <BreezeResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
-                            v-if="$page.props.auth.user"
+                            v-for="category in $page.props.categories"
+                            :key="category.id"
+                            :href="route('category', category.slug)"
+                            :active="route().current('category', category.slug)"
                         >
-                            Dashboard
+                            {{ category.name }}
                         </BreezeResponsiveNavLink>
                     </div>
 
@@ -183,6 +198,9 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
+                            <BreezeResponsiveNavLink :href="route('dashboard')">
+                                Dashboard
+                            </BreezeResponsiveNavLink>
                             <BreezeResponsiveNavLink
                                 :href="route('logout')"
                                 method="post"
@@ -243,6 +261,6 @@ export default {
     font-size: 10px;
     --tw-bg-opacity: 1;
     background-color: rgba(33, 33, 33, var(--tw-bg-opacity));
-    right: -0.65rem;
+    right: -0.3rem;
 }
 </style>
