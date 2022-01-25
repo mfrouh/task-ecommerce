@@ -20556,14 +20556,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Components_ProductCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Components/ProductCard.vue */ "./resources/js/Components/ProductCard.vue");
 /* harmony import */ var _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Authenticated.vue */ "./resources/js/Layouts/Authenticated.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _ocrv_vue_tailwind_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ocrv/vue-tailwind-pagination */ "./node_modules/@ocrv/vue-tailwind-pagination/dist/vue-tailwind-pagination.es.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
+    VueTailwindPagination: _ocrv_vue_tailwind_pagination__WEBPACK_IMPORTED_MODULE_2__["default"],
     BreezeAuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
+    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.Head,
     ProductCard: _Components_ProductCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
@@ -20572,10 +20575,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      MyProducts: this.products,
+      MyProducts: this.products.data,
       MyCategory: this.category,
       min_price: null,
-      max_price: null
+      max_price: null,
+      currentPage: this.products.meta.current_page,
+      perPage: this.products.meta.per_page,
+      total: this.products.meta.total
     };
   },
   methods: {
@@ -20584,12 +20590,20 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.route("filter"), {
         params: {
+          page: this.currentPage,
+          categories: [this.category.id],
           min_price: this.min_price,
           max_price: this.max_price
         }
       }).then(function (response) {
-        _this.MyProducts = response.data.products;
+        _this.MyProducts = response.data.data;
+        _this.perPage = response.data.meta.per_page;
+        _this.total = response.data.meta.total;
       })["catch"](function (e) {});
+    },
+    changePage: function changePage(numberPage) {
+      this.currentPage = numberPage;
+      this.filProducts();
     }
   },
   mounted: function mounted() {}
@@ -20633,9 +20647,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_ProductCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Components/ProductCard.vue */ "./resources/js/Components/ProductCard.vue");
-/* harmony import */ var _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Authenticated.vue */ "./resources/js/Layouts/Authenticated.vue");
-/* harmony import */ var _Components_NavLink_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/NavLink.vue */ "./resources/js/Components/NavLink.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _ocrv_vue_tailwind_pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ocrv/vue-tailwind-pagination */ "./node_modules/@ocrv/vue-tailwind-pagination/dist/vue-tailwind-pagination.es.js");
+/* harmony import */ var _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Layouts/Authenticated.vue */ "./resources/js/Layouts/Authenticated.vue");
+/* harmony import */ var _Components_NavLink_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/NavLink.vue */ "./resources/js/Components/NavLink.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 
 
@@ -20643,11 +20659,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.Link,
-    BreezeAuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.Head,
+    VueTailwindPagination: _ocrv_vue_tailwind_pagination__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.Link,
+    BreezeAuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.Head,
     ProductCard: _Components_ProductCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BreezeNavLink: _Components_NavLink_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    BreezeNavLink: _Components_NavLink_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     products: Object,
@@ -20655,11 +20672,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      MyProducts: this.products,
+      MyProducts: this.products.data,
       MYcategories: this.categories,
       min_price: null,
       max_price: null,
-      filCategories: []
+      filCategories: [],
+      currentPage: this.products.meta.current_page,
+      perPage: this.products.meta.per_page,
+      total: this.products.meta.total
     };
   },
   methods: {
@@ -20668,13 +20688,20 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.route("filter"), {
         params: {
+          page: this.currentPage,
           categories: this.filCategories,
           min_price: this.min_price,
           max_price: this.max_price
         }
       }).then(function (response) {
-        _this.MyProducts = response.data.products;
+        _this.MyProducts = response.data.data;
+        _this.perPage = response.data.meta.per_page;
+        _this.total = response.data.meta.total;
       })["catch"](function (e) {});
+    },
+    changePage: function changePage(numberPage) {
+      this.currentPage = numberPage;
+      this.filProducts();
     }
   },
   mounted: function mounted() {}
@@ -23646,10 +23673,15 @@ var _hoisted_19 = {
   key: 1,
   "class": "relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
 };
+var _hoisted_20 = {
+  "class": "col-span-4"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
   var _component_product_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("product-card");
+
+  var _component_VueTailwindPagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("VueTailwindPagination");
 
   var _component_BreezeAuthenticatedLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BreezeAuthenticatedLayout");
 
@@ -23694,7 +23726,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["product"]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueTailwindPagination, {
+        current: $data.currentPage,
+        total: $data.total,
+        "per-page": $data.perPage,
+        onPageChanged: _cache[3] || (_cache[3] = function ($event) {
+          return $options.changePage($event);
+        })
+      }, null, 8
+      /* PROPS */
+      , ["current", "total", "per-page"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
     }),
     _: 1
     /* STABLE */
@@ -23876,10 +23917,15 @@ var _hoisted_22 = {
   key: 1,
   "class": "relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
 };
+var _hoisted_23 = {
+  "class": "col-span-4"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
   var _component_product_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("product-card");
+
+  var _component_VueTailwindPagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("VueTailwindPagination");
 
   var _component_BreezeAuthenticatedLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BreezeAuthenticatedLayout");
 
@@ -23937,7 +23983,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["product"]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueTailwindPagination, {
+        current: $data.currentPage,
+        total: $data.total,
+        "per-page": $data.perPage,
+        onPageChanged: _cache[4] || (_cache[4] = function ($event) {
+          return $options.changePage($event);
+        })
+      }, null, 8
+      /* PROPS */
+      , ["current", "total", "per-page"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
     }),
     _: 1
     /* STABLE */

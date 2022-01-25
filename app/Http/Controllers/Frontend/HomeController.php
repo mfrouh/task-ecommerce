@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
         $products = ProductResource::collection(Product::whereHas('category', function ($query) {
             $query->active();
-        })->filter()->active()->get());
+        })->filter()->active()->paginate(16));
         $categories = CategoryResource::collection(Category::has('products')->active()->get());
         return Inertia::render('Frontend/Home', ['products' => $products, 'categories' => $categories]);
     }

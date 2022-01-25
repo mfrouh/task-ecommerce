@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function __invoke(Category $category, Request $request)
     {
-        $products = ProductResource::collection(Product::where('category_id', $category->id)->active()->get());
-        return Inertia::render('Frontend/Category', ['category' => CategoryResource::make($category), 'products' => ProductResource::collection($products)]);
+        $products = ProductResource::collection(Product::where('category_id', $category->id)->active()->paginate(16));
+        return Inertia::render('Frontend/Category', ['category' => CategoryResource::make($category), 'products' => $products]);
     }
 }

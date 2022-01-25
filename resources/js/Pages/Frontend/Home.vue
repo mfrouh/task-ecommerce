@@ -87,15 +87,17 @@
                         v-if="MyProducts.length == 0"
                     >
                         <div
-                            class="bg-white overflow-hidden shadow-sm sm:rounded-lg  w-full"
+                            class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-full"
                         >
-                            <div class="p-6 bg-white border-b border-gray-200 text-center">
+                            <div
+                                class="p-6 bg-white border-b border-gray-200 text-center"
+                            >
                                 Not Found Products
                             </div>
                         </div>
                     </div>
                     <div
-                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3  sm:grid-cols-1 gap-4 mx-auto justify-center"
+                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
                         v-if="MyProducts.length != 0"
                     >
                         <product-card
@@ -103,6 +105,14 @@
                             :key="product.id"
                             :product="product"
                         ></product-card>
+                        <div class="col-span-4">
+                            <VueTailwindPagination
+                                :current="currentPage"
+                                :total="total"
+                                :per-page="perPage"
+                                @page-changed="changePage($event)"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,6 +122,7 @@
 
 <script>
 import ProductCard from "../../Components/ProductCard.vue";
+import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/inertia-vue3";
@@ -119,6 +130,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
+        VueTailwindPagination,
         Link,
         BreezeAuthenticatedLayout,
         Head,
@@ -131,11 +143,14 @@ export default {
     },
     data() {
         return {
-            MyProducts: this.products,
+            MyProducts: this.products.data,
             MYcategories: this.categories,
             min_price: null,
             max_price: null,
             filCategories: [],
+            currentPage: this.products.meta.current_page,
+            perPage: this.products.meta.per_page,
+            total: this.products.meta.total,
         };
     },
     methods: {
@@ -143,15 +158,22 @@ export default {
             axios
                 .get(this.route("filter"), {
                     params: {
+                        page: this.currentPage,
                         categories: this.filCategories,
                         min_price: this.min_price,
                         max_price: this.max_price,
                     },
                 })
                 .then((response) => {
-                    this.MyProducts = response.data.products;
+                    this.MyProducts = response.data.data;
+                    this.perPage = response.data.meta.per_page;
+                    this.total = response.data.meta.total;
                 })
                 .catch((e) => {});
+        },
+        changePage(numberPage) {
+            this.currentPage = numberPage;
+            this.filProducts();
         },
     },
     mounted() {},
