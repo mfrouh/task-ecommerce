@@ -20,7 +20,7 @@
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <BreezeNavLink
-                                    v-for="category in $page.props.categories"
+                                    v-for="category in $page.props.navCategories"
                                     :key="category.id"
                                     :href="route('category', category.slug)"
                                     :active="
@@ -174,7 +174,7 @@
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <BreezeResponsiveNavLink
-                            v-for="category in $page.props.categories"
+                            v-for="category in $page.props.navCategories"
                             :key="category.id"
                             :href="route('category', category.slug)"
                             :active="route().current('category', category.slug)"

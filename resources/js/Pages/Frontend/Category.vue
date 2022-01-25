@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div
-                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mx-auto justify-center"
+                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
                         v-if="MyProducts.length != 0"
                     >
                         <product-card

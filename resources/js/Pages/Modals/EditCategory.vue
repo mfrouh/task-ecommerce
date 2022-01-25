@@ -17,6 +17,7 @@
                     <span class="mr-3 text-sm text-gray-600">Status</span>
                     <BreezeCheckbox
                         name="status"
+                        :checked="checkStatus"
                         v-model:checked="form.status"
                     />
                 </label>
@@ -92,6 +93,11 @@ export default {
                     this.errors = err.response.data.errors;
                     this.form.processing = false;
                 });
+        },
+    },
+     computed: {
+        checkStatus() {
+            return this.form.status ? true : false;
         },
     },
 };

@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user() ? $request->user()->only('id', 'email', 'name') : null,
             ],
             'cartCount' => $request->user() ? Cart::content()->count() : 0,
-            'categories' => CategoryResource::collection(Category::withCount('products')->has('products')->active()->orderBy('products_count','desc')->take(4)->get()),
+            'navCategories' => CategoryResource::collection(Category::withCount('products')->has('products')->active()->orderBy('products_count','desc')->take(4)->get()),
         ]);
     }
 }
