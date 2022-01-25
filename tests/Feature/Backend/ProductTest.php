@@ -38,7 +38,7 @@ class ProductTest extends TestCase
     {
         Product::factory(5)->create();
 
-        $this->json('get', route('backend.product.index'))
+        $this->json('get', route('backend.product.getData'))
             ->assertJsonCount(5, 'data')
             ->assertSuccessful();
     }
@@ -65,7 +65,7 @@ class ProductTest extends TestCase
         $product = Product::factory()->create();
 
         $this->json('get', route('backend.product.show', [$product->id]))
-            ->assertJsonPath('data.slug', $product->slug)
+            ->assertJsonPath('slug', $product->slug)
             ->assertSuccessful();
     }
 

@@ -21,7 +21,7 @@ class CartController extends Controller
     {
         $carts = CartResource::collection(Cart::Content());
 
-        return response()->json(['data' => $carts], 200);
+        return $carts;
     }
 
     public function store(Request $request)

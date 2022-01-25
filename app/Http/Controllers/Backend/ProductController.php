@@ -19,7 +19,6 @@ class ProductController extends Controller
     {
         $products = ProductResource::collection(Product::with('category')->paginate(10));
 
-        // return response()->json(['data' => $products], 200);
         return Inertia::render('Backend/Product', ['products' => $products]);
     }
 
@@ -27,7 +26,7 @@ class ProductController extends Controller
     {
         $products = ProductResource::collection(Product::with('category')->paginate(10));
 
-        return response()->json(['data' => $products], 200);
+        return $products;
     }
 
     /**
@@ -51,7 +50,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return response()->json(['data' => ProductResource::make($product)], 200);
+        return ProductResource::make($product);
     }
 
     /**

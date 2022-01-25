@@ -29,18 +29,18 @@ class CartTest extends TestCase
     {
         Cart::factory(5)->create(['user_id' => $this->customer->id]);
 
-        $this->json('get', route('cart.index'))
-            ->assertJsonPath('data.0.total_price', Cart::content()[0]->total_price)
-            ->assertJsonCount(5, 'data')
+        $this->json('get', route('getCart'))
+            ->assertJsonPath('0.total_price', Cart::content()[0]->total_price)
+            ->assertJsonCount(5)
             ->assertSuccessful();
 
         Cart::factory(7)->create(['user_id' => $this->customer2->id]);
 
         $this->actingAs($this->customer2);
 
-        $this->json('get', route('cart.index'))
-            ->assertJsonPath('data.0.total_price', Cart::content()[0]->total_price)
-            ->assertJsonCount(7, 'data')
+        $this->json('get', route('getCart'))
+            ->assertJsonPath('0.total_price', Cart::content()[0]->total_price)
+            ->assertJsonCount(7)
             ->assertSuccessful();
 
     }

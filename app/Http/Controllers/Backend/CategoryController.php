@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Inertia\Inertia;
-use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
+use App\Models\Category;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -19,7 +19,6 @@ class CategoryController extends Controller
     {
         $categories = CategoryResource::collection(Category::paginate(10));
 
-        // return response()->json(['data' => $categories], 200);
         return Inertia::render('Backend/Category', ['categories' => $categories]);
 
     }
@@ -28,7 +27,7 @@ class CategoryController extends Controller
     {
         $categories = CategoryResource::collection(Category::paginate(10));
 
-        return response()->json(['data' => $categories], 200);
+        return $categories;
     }
 
     /**
@@ -52,7 +51,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response()->json(['data' => CategoryResource::make($category)], 200);
+        return CategoryResource::make($category);
     }
 
     /**

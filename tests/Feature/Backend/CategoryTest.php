@@ -25,7 +25,7 @@ class CategoryTest extends TestCase
     {
         Category::factory(5)->create();
 
-        $this->json('get', route('backend.category.index'))
+        $this->json('get', route('backend.category.getData'))
             ->assertJsonCount(5, 'data')
             ->assertSuccessful();
     }
@@ -54,7 +54,7 @@ class CategoryTest extends TestCase
         $category = Category::factory()->create();
 
         $this->json('get', route('backend.category.show', [$category->id]))
-            ->assertJsonPath('data.slug', $category->slug)
+            ->assertJsonPath('slug', $category->slug)
             ->assertSuccessful();
     }
 
