@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div
-                        class="relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
+                        class="relative m-3 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-auto justify-center"
                         v-if="MyProducts.length != 0"
                     >
                         <product-card
@@ -91,14 +91,17 @@
                             :key="product.id"
                             :product="product"
                         ></product-card>
-                        <div class="col-span-4">
-                            <VueTailwindPagination
-                                :current="currentPage"
-                                :total="total"
-                                :per-page="perPage"
-                                @page-changed="changePage($event)"
-                            />
-                        </div>
+                    </div>
+                    <div
+                        class="relative m-3 flex flex-wrap mx-auto justify-center"
+                        v-if="MyProducts.length != 0"
+                    >
+                        <VueTailwindPagination
+                            :current="currentPage"
+                            :total="total"
+                            :per-page="perPage"
+                            @page-changed="changePage($event)"
+                        />
                     </div>
                 </div>
             </div>

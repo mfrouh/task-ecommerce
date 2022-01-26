@@ -3,35 +3,44 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductObserver
 {
 
-    public function creating(Product $product)
+    public function created(Product $product)
     {
         if (request()->hasFile('image')) {
             $name = request()->file('image')->storeAs('images/products', request()->file('image')->hashName(), 'public');
-            $product->image = $name;
+            $product->update(['image' => $name]);
         }
     }
-
 
     public function updating(Product $product)
     {
         if (request()->hasFile('image')) {
-            if (File::exists(public_path($product->image))) {
-                File::delete(public_path($product->image));
+            $image = DB::table('products')->where('id', $product->id)->first()->image;
+            $product->image = $image;
+        }
+    }
+
+    public function updated(Product $product)
+    {
+        if (request()->hasFile('image')) {
+            if (Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
             }
             $name = request()->file('image')->storeAs('images/products', request()->file('image')->hashName(), 'public');
-            $product->image = $name;
+            $product->updateQuietly(['image' => $name]);
         }
     }
 
     public function deleted(Product $product)
     {
-        if (File::exists(public_path($product->image))) {
-            File::delete(public_path($product->image));
+        if (Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
         }
     }
 

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -51,7 +52,6 @@ class Product extends Model
 
     public function getQuantityInCartAttribute()
     {
-        return Cart::where('user_id', auth()->id())->where('product_id', $this->id)->first()?->quantity??1;
+        return Cart::where('user_id', auth()->id())->where('product_id', $this->id)->first()?->quantity ?? 1;
     }
-
 }

@@ -23671,10 +23671,11 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_18 = [_hoisted_17];
 var _hoisted_19 = {
   key: 1,
-  "class": "relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
+  "class": "relative m-3 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-auto justify-center"
 };
 var _hoisted_20 = {
-  "class": "col-span-4"
+  key: 2,
+  "class": "relative m-3 flex flex-wrap mx-auto justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -23726,7 +23727,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["product"]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueTailwindPagination, {
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.MyProducts.length != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueTailwindPagination, {
         current: $data.currentPage,
         total: $data.total,
         "per-page": $data.perPage,
@@ -23735,7 +23736,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 8
       /* PROPS */
-      , ["current", "total", "per-page"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
+      , ["current", "total", "per-page"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
     }),
     _: 1
     /* STABLE */
@@ -23915,10 +23916,11 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_21 = [_hoisted_20];
 var _hoisted_22 = {
   key: 1,
-  "class": "relative m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto justify-center"
+  "class": "relative m-3 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-auto justify-center"
 };
 var _hoisted_23 = {
-  "class": "col-span-4"
+  key: 2,
+  "class": "relative m-3 flex flex-wrap mx-auto justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -23983,7 +23985,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["product"]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueTailwindPagination, {
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.MyProducts.length != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueTailwindPagination, {
         current: $data.currentPage,
         total: $data.total,
         "per-page": $data.perPage,
@@ -23992,7 +23994,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 8
       /* PROPS */
-      , ["current", "total", "per-page"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
+      , ["current", "total", "per-page"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
     }),
     _: 1
     /* STABLE */
