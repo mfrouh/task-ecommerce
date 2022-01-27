@@ -20,7 +20,7 @@ class FilterController extends Controller
         $products = ProductResource::collection(
             Product::whereHas('category', function ($query) {
                 $query->active();
-            })->Filter()->active()->paginate(16));
+            })->Filter()->Sort()->active()->paginate(16));
         return $products;
     }
 }

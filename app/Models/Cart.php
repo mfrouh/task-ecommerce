@@ -25,6 +25,16 @@ class Cart extends Model
         return $query->with('product')->where('user_id', auth()->id())->get();
     }
 
+    public function ScopeCountCart(Builder $query)
+    {
+        return $query->where('user_id', auth()->id())->count();
+    }
+
+    public function ScopeTotal(Builder $query)
+    {
+        return Cart::Content()->sum('total_price');
+    }
+
     public function getTotalPriceAttribute()
     {
         return $this->quantity * $this->product->price;

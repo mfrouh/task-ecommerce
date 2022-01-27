@@ -20,7 +20,8 @@
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <BreezeNavLink
-                                    v-for="category in $page.props.navCategories"
+                                    v-for="category in $page.props
+                                        .navCategories"
                                     :key="category.id"
                                     :href="route('category', category.slug)"
                                     :active="
@@ -30,17 +31,17 @@
                                         )
                                     "
                                 >
-                                   {{ category.name }}
+                                    {{ category.name }}
                                 </BreezeNavLink>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                            <Link
-                                :href="route('cart.index')"
+                            <button
                                 class="flex items-center mr-5 justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
-                                aria-label="cart-button "
+                                aria-label="cart-button"
+                                @click="openCart = !openCart"
                             >
                                 <svg
                                     class="flex-shrink-0 h-6 w-6 text-black group-hover:text-gray-500"
@@ -58,11 +59,11 @@
                                     />
                                 </svg>
                                 <span
-                                    v-if="$page.props.cartCount"
+                                    v-if="$page.props.cart.count"
                                     class="cart-counter-badge flex items-center justify-center bg-heading text-white absolute -top-2.5 xl:-top-3 -end-2.5 xl:-end-3 rounded-full font-bold"
-                                    >{{ $page.props.cartCount }}</span
+                                    >{{ $page.props.cart.count }}</span
                                 >
-                            </Link>
+                            </button>
                             <div
                                 class="hidden md:flex justify-end items-center space-s-6 lg:space-s-5 xl:space-s-8 2xl:space-s-10 ms-auto flex-shrink-0"
                                 v-if="!$page.props.auth.user"
@@ -223,6 +224,7 @@
             <!-- Page Content -->
             <main>
                 <slot />
+                <CartNav :show="openCart"  @close="openCart = false" />
             </main>
         </div>
     </div>
@@ -233,11 +235,13 @@ import BreezeApplicationLogo from "@/Components/ApplicationLogo.vue";
 import BreezeDropdown from "@/Components/Dropdown.vue";
 import BreezeDropdownLink from "@/Components/DropdownLink.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
+import CartNav from "@/Pages/Frontend/CartNav.vue";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
+        CartNav,
         BreezeApplicationLogo,
         BreezeDropdown,
         BreezeDropdownLink,
@@ -248,6 +252,7 @@ export default {
 
     data() {
         return {
+            openCart: false,
             showingNavigationDropdown: false,
         };
     },

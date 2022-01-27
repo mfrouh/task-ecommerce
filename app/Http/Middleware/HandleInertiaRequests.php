@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\CartResource;
 use App\Http\Resources\CategoryResource;
 use App\Models\Cart;
 use App\Models\Category;
@@ -40,8 +41,12 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user() ? $request->user()->only('id', 'email', 'name') : null,
             ],
-            'cartCount' => $request->user() ? Cart::content()->count() : 0,
-            'navCategories' => CategoryResource::collection(Category::withCount('products')->has('products')->active()->orderBy('products_count','desc')->take(4)->get()),
+            'cart' => [
+                'count' => $request->user() ? Cart::content()->count() : 0,
+                'items' => $request->user() ? CartResource::collection(Cart::content()) : [],
+                'total' => $request->user() ? Cart::Total() : 0,
+            ],
+            'navCategories' => CategoryResource::collection(Category::withCount('products')->has('products')->active()->orderBy('products_count', 'desc')->take(4)->get()),
         ]);
     }
 }

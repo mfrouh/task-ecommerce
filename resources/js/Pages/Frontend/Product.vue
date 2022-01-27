@@ -98,7 +98,7 @@ export default {
                     quantity: this.quantity,
                 })
                 .then((response) => {
-                    this.$page.props.cartCount = response.data.cartCount;
+                    this.$page.props.cart= response.data.cart;
                     this.$toast.success(response.data.message);
                 })
                 .catch((e) => {

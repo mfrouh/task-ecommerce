@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -47,7 +46,17 @@ class Product extends Model
             ->when(request('categories'), fn(Builder $query) => $query->whereIn('category_id', request('categories')))
             ->when(request('min_price'), fn(Builder $query) => $query->minPriceThan(request('min_price')))
             ->when(request('max_price'), fn(Builder $query) => $query->maxPriceThan(request('max_price')));
+    }
 
+    public function ScopeSort(Builder $query)
+    {
+        $sort = [
+            'newest' => ['id', 'desc'],
+            'priceLTH' => ['price', 'asc'],
+            'priceHTL' => ['price', 'desc'],
+        ];
+        $sortType = $sort[request('sortBy') && in_array(request('sortBy'), array_keys($sort)) ? request('sortBy') : 'newest'];
+        return $query->orderBy($sortType[0], $sortType[1]);
     }
 
     public function getQuantityInCartAttribute()

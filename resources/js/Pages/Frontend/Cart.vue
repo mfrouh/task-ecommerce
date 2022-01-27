@@ -171,7 +171,7 @@ export default {
             axios
                 .delete(this.route("cart.destroy", cart))
                 .then((response) => {
-                    this.$page.props.cartCount = response.data.cartCount;
+                    this.$page.props.cart.count = response.data.cartCount;
                     this.getCart();
                     this.$toast.error(response.data.message);
                 })
@@ -181,7 +181,7 @@ export default {
             axios
                 .delete(this.route("cart.clear"))
                 .then((response) => {
-                    this.$page.props.cartCount = response.data.cartCount;
+                    this.$page.props.cart.count = response.data.cartCount;
                     this.getCart();
                     this.$toast.error(response.data.message);
                 })

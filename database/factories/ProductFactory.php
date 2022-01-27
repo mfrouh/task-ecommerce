@@ -17,7 +17,7 @@ class ProductFactory extends Factory
         return [
             'name' => 'Product '.rand(1,99999),
             'price' => rand(50, 600),
-            'image' => 'images/products/' . rand(1, 10).'.png',
+            'image' => 'images/products/' . rand(1, 10).'.jpg',
             'quantity' => rand(4, 300),
             'status' => rand(0, 1),
             'description' => $this->faker->text,
