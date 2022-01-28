@@ -5,7 +5,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <button
                     @click="createCategory = true"
-                    class="bg-transparent bg-blue-500 text-gray-100 font-bold py-2 px-4 rounded-md"
+                    class="bg-blue-700 text-gray-100 font-bold py-1 px-4 rounded-md shadow-sm"
                 >
                     Create
                 </button>
@@ -18,18 +18,18 @@
                                 class="overflow-hidden shadow-md sm:rounded-lg"
                             >
                                 <table class="min-w-full text-center">
-                                    <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <thead class="bg-blue-700 dark:bg-gray-700">
                                         <tr>
                                             <th
                                                 scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider  text-bold text-white uppercase dark:text-gray-400"
                                             >
                                                 Name
                                             </th>
 
                                             <th
                                                 scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-bold text-white uppercase dark:text-gray-400"
                                             >
                                                 Status
                                             </th>
