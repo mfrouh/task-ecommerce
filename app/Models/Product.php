@@ -61,6 +61,7 @@ class Product extends Model
 
     public function getQuantityInCartAttribute()
     {
-        return Cart::where('user_id', auth()->id())->where('product_id', $this->id)->first()?->quantity ?? 1;
+        $cart = Cart::where('user_id', auth()->id())->where('product_id', $this->id)->first();
+        return $cart ? $cart->quantity : 1;
     }
 }
